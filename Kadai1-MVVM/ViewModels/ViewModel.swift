@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 
-
 protocol ViewModelInputs {
     var number1TextFieldObservable: Observable<String> { get }
     var number2TextFieldObservable: Observable<String> { get }
@@ -49,20 +48,14 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     }
 
     func setupBindings() {
-        number1TextFieldObservable.subscribe { number1Text in
-            self.number1 = Int(number1Text) ?? 0
-        }
-        .disposed(by: disposeBag)
 
-        number2TextFieldObservable.subscribe { number2Text in
-            self.number2 = Int(number2Text) ?? 0
-        }
-        .disposed(by: disposeBag)
+        let sumInput = Observable.combineLatest(number1TextFieldObservable, number2TextFieldObservable, number3TextFieldObservable)
 
-        number3TextFieldObservable.subscribe { number3Text in
-            self.number3 = Int(number3Text) ?? 0
-        }
-        .disposed(by: disposeBag)
+        sumInput.subscribe { number1,number2,number3 in
+            self.number1 = Int(number1) ?? 0
+            self.number2 = Int(number2) ?? 0
+            self.number3 = Int(number3) ?? 0
+        }.disposed(by: disposeBag)
         
         calculateButtonObservable.subscribe(onNext: {
             [weak self] in
