@@ -30,7 +30,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.setupBindings()
+        setupBindings()
+    }
+
+    private func setupBindings() {
         viewModel.resultNumberPublishSubject.bind(to: numberLabel.rx.text).disposed(by: disposeBag)
     }
 }

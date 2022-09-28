@@ -45,9 +45,11 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
         self.number2TextFieldObservable = number2TextFieldObservable
         self.number3TextFieldObservable = number3TextFieldObservable
         self.calculateButtonObservable = calculateButtonObservable
+
+        setupBindings()
     }
 
-    func setupBindings() {
+    private func setupBindings() {
 
         let sumInput = Observable.combineLatest(number1TextFieldObservable, number2TextFieldObservable, number3TextFieldObservable)
 
