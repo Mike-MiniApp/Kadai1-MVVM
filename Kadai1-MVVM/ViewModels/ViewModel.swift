@@ -16,7 +16,7 @@ protocol ViewModelInputs {
 }
 
 protocol ViewModelOutputs {
-    var resultNumberPublishSubject: PublishSubject<Int> { get }
+    var resultNumberPublishSubject: PublishSubject<String> { get }
 }
 
 class ViewModel: ViewModelInputs, ViewModelOutputs {
@@ -27,7 +27,7 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
     var calculateButtonObservable: Observable<Void>
 
     // MARK: Outputs
-    var resultNumberPublishSubject = PublishSubject<Int>()
+    var resultNumberPublishSubject = PublishSubject<String>()
 
     // MARK: Model Connect
     let calculator = Calculator()
@@ -62,7 +62,7 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
             self?.calculator.addition(number1: self?.number1 ?? 0,
                                       number2: self?.number2 ?? 0,
                                       number3: self?.number3 ?? 0)
-            self?.resultNumberPublishSubject.onNext(self?.calculator.sum ?? 0)
+            self?.resultNumberPublishSubject.onNext(String(self?.calculator.sum ?? 0))
         })
         .disposed(by: disposeBag)
     }

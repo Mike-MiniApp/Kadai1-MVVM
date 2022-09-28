@@ -31,11 +31,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.setupBindings()
-        // TODO: Bindで書ける？
-        viewModel.resultNumberPublishSubject.subscribe(onNext: { [weak self] number in
-            self?.numberLabel.text = String(number)
-        })
-        .disposed(by: disposeBag)
+        viewModel.resultNumberPublishSubject.bind(to: numberLabel.rx.text).disposed(by: disposeBag)
     }
 }
 
