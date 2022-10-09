@@ -7,19 +7,29 @@
 
 import Foundation
 import RxSwift
-
+// MARK: - Inputs
 protocol ViewModelInputs {
     var number1TextFieldObservable: Observable<String> { get }
     var number2TextFieldObservable: Observable<String> { get }
     var number3TextFieldObservable: Observable<String> { get }
     var calculateButtonObservable: Observable<Void> { get }
 }
-
+// MARK: - Outputs
 protocol ViewModelOutputs {
     var resultNumberPublishSubject: PublishSubject<String> { get }
 }
 
-class ViewModel: ViewModelInputs, ViewModelOutputs {
+// MARK: - ViewModelType
+protocol ViewModelType {
+    var inputs: ViewModelInputs { get }
+    var outputs: ViewModelOutputs { get }
+}
+
+class ViewModel: ViewModelInputs, ViewModelOutputs, ViewModelType{
+    var inputs: ViewModelInputs { return self }
+
+    var outputs: ViewModelOutputs { return self }
+
     // MARK: Inputs
     var number1TextFieldObservable: Observable<String>
     var number2TextFieldObservable: Observable<String>
@@ -68,5 +78,4 @@ class ViewModel: ViewModelInputs, ViewModelOutputs {
         })
         .disposed(by: disposeBag)
     }
-
 }

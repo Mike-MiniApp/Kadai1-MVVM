@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     }
 
     private func setupBindings() {
-        viewModel.resultNumberPublishSubject.bind(to: numberLabel.rx.text).disposed(by: disposeBag)
+        viewModel.outputs.resultNumberPublishSubject.bind(to: numberLabel.rx.text).disposed(by: disposeBag)
     }
 }
 
