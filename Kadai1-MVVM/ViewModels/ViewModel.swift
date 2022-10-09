@@ -25,11 +25,7 @@ protocol ViewModelType {
     var outputs: ViewModelOutputs { get }
 }
 
-class ViewModel: ViewModelInputs, ViewModelOutputs, ViewModelType{
-    var inputs: ViewModelInputs { return self }
-
-    var outputs: ViewModelOutputs { return self }
-
+class ViewModel: ViewModelInputs, ViewModelOutputs {
     // MARK: Inputs
     var number1TextFieldObservable: Observable<String>
     var number2TextFieldObservable: Observable<String>
@@ -78,4 +74,10 @@ class ViewModel: ViewModelInputs, ViewModelOutputs, ViewModelType{
         })
         .disposed(by: disposeBag)
     }
+}
+
+extension ViewModel: ViewModelType {
+    var inputs: ViewModelInputs { return self }
+
+    var outputs: ViewModelOutputs { return self }
 }
